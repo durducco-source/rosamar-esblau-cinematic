@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rosamar Es Blau · Web cinematográfica
 
-## Getting Started
+Web del **Hotel Rosamar Es Blau Adults Only +21** (Lloret de Mar), diseño "cinematográfico" por actos
+inspirado en la dirección creativa de referencia. Desarrollo: **DURDUC**.
 
-First, run the development server:
+- Web publicada: https://durducco-source.github.io/rosamar-esblau-cinematic/
+- Código: https://github.com/durducco-source/rosamar-esblau-cinematic
+
+## Tecnologías
+
+Next.js 16 (App Router, exportación estática) · React 19 · TypeScript · Tailwind CSS 4.
+Sin dependencias adicionales: animaciones con CSS y hooks propios.
+
+## Ejecutar en local
+
+Requisitos: Node.js 20 o superior.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Otros comandos:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build      # compila la web estática en la carpeta out/
+npm run lint       # revisa el código
+npm run typecheck  # comprueba los tipos de TypeScript
+npm run deploy     # compila y publica en GitHub Pages (rama gh-pages)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estructura
 
-## Learn More
+```
+src/
+├── app/            → layout (SEO, tipografías), página y estilos globales (tema en :root)
+├── components/     → componentes reutilizables
+│   ├── CinemaHero  → portada por "actos" ligada al scroll, con contador tipo vídeo
+│   ├── Gallery     → galería horizontal en raíl + visor
+│   ├── Reels       → vídeos verticales con reproductor
+│   ├── Menu        → carta / servicios con pestañas accesibles
+│   ├── Sections    → presentación, capítulos, opiniones, preguntas, contacto, cierre, pie
+│   └── Nav, Modal, Parallax, Reveal, MediaView, Icon
+├── content/
+│   ├── site.ts     → TODO el contenido (textos, imágenes, enlaces) ← editar aquí
+│   └── types.ts    → modelo de contenido
+└── lib/            → utilidades y hooks (progreso de scroll, aparición, etc.)
+public/media/       → fotos y vídeos
+scripts/deploy.mjs  → publicación en GitHub Pages
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Personalizar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Textos e imágenes:** `src/content/site.ts` (en los títulos, `*texto*` sale en cursiva destacada).
+- **Colores:** variables `--bg`, `--bg-2`, `--fg`, `--accent` en `src/app/globals.css`.
+- **Tipografías:** `src/app/layout.tsx`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Funcionalidades
 
-## Deploy on Vercel
+- Portada cinematográfica: 5 actos que cambian con el scroll (zoom lento, fundidos, franjas de cine,
+  grano de película, viñeta y contador `00:01 / 00:05`).
+- Menú fijo que se vuelve sólido al bajar, menú móvil a pantalla completa.
+- Capítulos con parallax, carta de habitaciones con pestañas (navegables con teclado).
+- Galería horizontal controlada por el scroll vertical, con visor (flechas del teclado y Escape).
+- Opiniones, preguntas frecuentes desplegables, contacto con mapa y botón flotante de reserva.
+- SEO: metadatos, Open Graph, datos estructurados `Hotel` (schema.org).
+- Accesible: enlace "saltar al contenido", foco visible, `prefers-reduced-motion` respetado.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Fuentes del contenido
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Textos, servicios, opiniones (9,3 · 1.342 encuestas) y fotos: web oficial rosamarhotels.com.
+No se muestran precios porque dependen de las fechas: "Reservar" lleva al motor de reservas oficial.
