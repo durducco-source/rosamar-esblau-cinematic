@@ -58,7 +58,7 @@ export type SiteContent = {
   chapters: { id: string; eyebrow: string; title: string; items: Chapter[] };
   menu?: { id: string; eyebrow: string; title: string; intro?: string; groups: MenuGroup[]; note?: string };
   gallery: { id: string; eyebrow: string; title: string; items: Media[] };
-  reels?: { eyebrow: string; title: string; items: Media[] };
+  reels?: { id?: string; eyebrow: string; title: string; items: Media[] };
   reviews?: { eyebrow: string; title: string; score?: string; scoreLabel?: string; source: string; quotes: Quote[] };
   faq?: { eyebrow: string; title: string; items: { q: string; a: string }[] };
   contact: {

@@ -18,7 +18,7 @@ export default function Reels({ site }: { site: SiteContent }) {
   const current = open === null ? null : r.items[open];
 
   return (
-    <section className="section" aria-labelledby="reels-title">
+    <section id={r.id} className="section" aria-labelledby="reels-title">
       <div className="wrap mb-12">
         <Reveal><Eyebrow>{r.eyebrow}</Eyebrow></Reveal>
         <Reveal delay={80}><h2 id="reels-title" className="heading">{rich(r.title)}</h2></Reveal>
