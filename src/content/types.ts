@@ -49,12 +49,13 @@ export type SiteContent = {
   cta: Link;
   hero: { acts: Act[]; scrollHint: string };
   intro: {
+    id: string;
     eyebrow: string;
     title: string;
     paragraphs: string[];
     stats?: { value: string; label: string }[];
   };
-  chapters: { eyebrow: string; title: string; items: Chapter[] };
+  chapters: { id: string; eyebrow: string; title: string; items: Chapter[] };
   menu?: { id: string; eyebrow: string; title: string; intro?: string; groups: MenuGroup[]; note?: string };
   gallery: { id: string; eyebrow: string; title: string; items: Media[] };
   reels?: { eyebrow: string; title: string; items: Media[] };

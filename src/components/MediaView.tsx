@@ -19,17 +19,27 @@ export default function MediaView({ media, className = "", playing, eager = fals
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    if (playing !== undefined) {
-      if (playing) v.play().catch(() => {});
+    // Los navegadores sólo permiten la reproducción automática de vídeos silenciados
+    v.muted = true;
+    let shouldPlay = false;
+    const tryPlay = () => { if (shouldPlay && v.paused) v.play().catch(() => {}); };
+    const set = (on: boolean) => {
+      shouldPlay = on;
+      if (on) tryPlay();
       else v.pause();
-      return;
+    };
+    v.addEventListener("canplay", tryPlay);
+
+    let obs: IntersectionObserver | undefined;
+    if (playing !== undefined) set(playing);
+    else {
+      obs = new IntersectionObserver(([e]) => set(e.isIntersecting), { threshold: 0.2 });
+      obs.observe(v);
     }
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) v.play().catch(() => {});
-      else v.pause();
-    }, { threshold: 0.2 });
-    obs.observe(v);
-    return () => obs.disconnect();
+    return () => {
+      v.removeEventListener("canplay", tryPlay);
+      obs?.disconnect();
+    };
   }, [playing]);
 
   if (media.type === "video") {
@@ -40,6 +50,7 @@ export default function MediaView({ media, className = "", playing, eager = fals
         src={asset(media.src)}
         poster={media.poster ? asset(media.poster) : undefined}
         muted
+        autoPlay={playing !== false}
         loop
         playsInline
         preload={eager ? "auto" : "metadata"}

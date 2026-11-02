@@ -23,7 +23,7 @@ export function Heading({ children, className = "" }: { children: string; classN
 export function Intro({ site }: { site: SiteContent }) {
   const { intro } = site;
   return (
-    <section className="section" aria-labelledby="intro-title">
+    <section id={intro.id} className="section" aria-labelledby="intro-title">
       <div className="wrap grid gap-12 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
         <div>
           <Reveal><Eyebrow>{intro.eyebrow}</Eyebrow></Reveal>
@@ -55,7 +55,7 @@ export function Intro({ site }: { site: SiteContent }) {
 export function Chapters({ site }: { site: SiteContent }) {
   const { chapters } = site;
   return (
-    <section className="section pt-0" aria-label={chapters.eyebrow}>
+    <section id={chapters.id} className="section pt-0" aria-label={chapters.eyebrow}>
       <div className="wrap mb-16">
         <Reveal><Eyebrow>{chapters.eyebrow}</Eyebrow></Reveal>
         <Reveal delay={80}><Heading>{chapters.title}</Heading></Reveal>

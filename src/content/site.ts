@@ -46,6 +46,7 @@ export const site: SiteContent = {
     ],
   },
   intro: {
+    id: "hotel",
     eyebrow: "El hotel",
     title: "Calma, mar y *pequeños lujos.*",
     paragraphs: [
@@ -60,6 +61,7 @@ export const site: SiteContent = {
     ],
   },
   chapters: {
+    id: "experiencias",
     eyebrow: "Experiencias",
     title: "Tres maneras de *no hacer nada.*",
     items: [
